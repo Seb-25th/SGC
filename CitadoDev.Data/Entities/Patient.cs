@@ -1,20 +1,16 @@
-﻿public class Patient : User
+﻿namespace CitadoDev.Data.Entities
 {
-    public DateTime DateOfBirth { get; set; }
+    public class Patient
+    {
+        public required int Id { get; set; }
+        public required string FirstName { get; set; }
+        public required string LastName { get; set; }
+        public required string Email { get; set; }
+        public string? Phone { get; set; }
+        public required DateTime DateOfBirth { get; set; }
+        public required string IdentityDocument { get; set; }
+        public required DateTime CreatedAt { get; set; }
 
-    public string Address { get; set; } = string.Empty;
-
-    public string EmergencyContact { get; set; } = string.Empty;
-
-    public string MedicalConditions { get; set; } = string.Empty;
-
-    public string InsurancePolicyNumber { get; set; } = string.Empty;
-
-    public Guid InsuranceProviderId { get; set; }
-
-    public InsuranceProvider InsuranceProvider { get; set; } = null!;
-
-    public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
-
-    public ICollection<MedicalRecord> MedicalRecords { get; set; } = new List<MedicalRecord>();
+        public ICollection<Appointment>? Appointments { get; set; }
+    }
 }

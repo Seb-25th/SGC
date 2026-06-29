@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CitadoDev.Data.Entities
+﻿namespace CitadoDev.Data.Entities
 {
-    internal class Specialty
+    public class Specialty
     {
+        public required int Id { get; set; }
+        public required string Name { get; set; }
+        public required string Description { get; set; }
+
+        public ICollection<Doctor>? Doctors { get; set; }
     }
 }
