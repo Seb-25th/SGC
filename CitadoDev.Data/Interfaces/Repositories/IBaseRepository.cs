@@ -1,4 +1,4 @@
-﻿namespace CitadoDev.Data.Interfaces
+﻿namespace CitadoDev.Data.Interfaces.Repositories
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {

@@ -1,7 +1,6 @@
 ﻿using CitadoDev.Data.Entities;
-using CitadoDev.Data.Interfaces;
 
-namespace CitadoDev.Data.Repositories
+namespace CitadoDev.Data.Interfaces.Repositories
 {
     public interface IMedicalRecordRepository : IBaseRepository<MedicalRecord>
     {

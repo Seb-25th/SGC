@@ -1,5 +1,5 @@
 ﻿using CitadoDev.Data.Context;
-using CitadoDev.Data.Interfaces;
+using CitadoDev.Data.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace CitadoDev.Data.Repositories
