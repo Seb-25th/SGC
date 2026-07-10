@@ -8,6 +8,9 @@ namespace CitadoDev.Data.Mappers.Mappers
         public AppointmentDtoMappingProfile()
         {
             CreateMap<Appointment, AppointmentDto>();
+            CreateMap<Appointment, AppointmentDto>().ReverseMap();
         }       
     }
 }
+
+
