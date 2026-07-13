@@ -3,12 +3,14 @@
 on:
   push:
     branches:
-      - Backend
-      - main
+      - develop
+      - qa
+      - master
   pull_request:
     branches:
-      - Backend
-      - main
+      - develop
+      - qa
+      - master
   workflow_dispatch: {}
 
 env:
