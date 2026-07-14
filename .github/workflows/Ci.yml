@@ -1,13 +1,13 @@
-﻿name: CI
+name: CI
 on:
   push:
     branches:
-      - dev     
+      - dev
       - qa
       - master
   pull_request:
     branches:
-      - dev      
+      - dev
       - qa
       - master
   workflow_dispatch: {}
@@ -20,7 +20,7 @@ jobs:
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
-    permissions:     
+    permissions:
       contents: read
       checks: write
       pull-requests: write
