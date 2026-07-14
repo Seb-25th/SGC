@@ -1,38 +1,40 @@
 ﻿name: CI
-
 on:
   push:
     branches:
-      - dev
+<<<<<<< Updated upstream
+      - develop
+=======
+      - dev     
+>>>>>>> Stashed changes
       - qa
       - master
   pull_request:
     branches:
-      - develop
+      - dev    
       - qa
       - master
   workflow_dispatch: {}
-
 env:
   DOTNET_VERSION: '9.0.x'
   SOLUTION_FILE: CitadoDev.sln
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
-
 jobs:
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
-
+    permissions:     
+      contents: read
+      checks: write
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup .NET ${{ env.DOTNET_VERSION }}
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-
       - name: Cache NuGet packages
         uses: actions/cache@v4
         with:
@@ -40,14 +42,11 @@ jobs:
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
-
       - name: Restore dependencies
         run: dotnet restore "${{ env.SOLUTION_FILE }}"
-
       - name: Build
         run: dotnet build "${{ env.SOLUTION_FILE }}" --configuration Release --no-restore
-
-      - name: Run tests
+      - name: Ejecutar pruebas unitarias
         run: >
           dotnet test "${{ env.SOLUTION_FILE }}"
           --configuration Release
@@ -55,35 +54,37 @@ jobs:
           --logger "trx;LogFileName=test-results.trx"
           --results-directory ./TestResults
           --collect:"XPlat Code Coverage"
-
       - name: Publish test results
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-results
           path: ./TestResults
-
+      - name: Reportar resultados de pruebas   
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: 'Resultados de Pruebas Unitarias'
+          path: './TestResults/*.trx'
+          reporter: dotnet-trx
+          fail-on-error: false
   publish:
     name: Publish Web App
     runs-on: ubuntu-latest
     needs: build-and-test
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/Backend' || github.ref == 'refs/heads/main')
-
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/qa' || github.ref == 'refs/heads/master')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup .NET ${{ env.DOTNET_VERSION }}
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-
       - name: Publish
         run: >
           dotnet publish CitadoDev.Web/CitadoDev.Web.csproj
           --configuration Release
           --output ./publish
-
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
         with:
