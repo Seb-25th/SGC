@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace CitadoDev.Data.DTOs
 {
-    public class MedicalRecordDto
+    public class MedicalRecordDto : BaseEntity<int>
     {
-        public required int Id { get; set; }
         public required int AppointmentId { get; set; }
         public required string Diagnosis { get; set; }
         public required string Treatment { get; set; }
