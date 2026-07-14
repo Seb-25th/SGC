@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CitadoDev.Data.DTOs
 {
-    public class DoctorDto : BaseEntity
+    public class DoctorDto : BaseEntity<int>
     {
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
