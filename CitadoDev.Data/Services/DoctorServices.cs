@@ -1,0 +1,15 @@
+﻿using AutoMapper;
+using CitadoDev.Data.DTOs;
+using CitadoDev.Data.Entities;
+using CitadoDev.Data.Interfaces.Repositories;
+using CitadoDev.Data.Interfaces.Services;
+
+namespace CitadoDev.Data.Services
+{
+    public class DoctorServices : BaseServices<Doctor, DoctorDto>, IDoctorServices
+    {
+        public DoctorServices(IMapper mapper, IDoctorRepository repo) : base(mapper, repo)
+        {
+        }
+    }
+}
