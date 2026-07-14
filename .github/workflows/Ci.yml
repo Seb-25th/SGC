@@ -2,11 +2,7 @@
 on:
   push:
     branches:
-<<<<<<< Updated upstream
-      - develop
-=======
-      - dev     
->>>>>>> Stashed changes
+      - dev    
       - qa
       - master
   pull_request:
