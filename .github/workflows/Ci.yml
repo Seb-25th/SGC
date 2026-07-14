@@ -2,7 +2,7 @@
 on:
   push:
     branches:
-      - dev      
+      - dev     
       - qa
       - master
   pull_request:
@@ -20,7 +20,7 @@ jobs:
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
-    permissions:   
+    permissions:     
       contents: read
       checks: write
       pull-requests: write
@@ -56,20 +56,11 @@ jobs:
         with:
           name: test-results
           path: ./TestResults
-      - name: Reportar resultados de pruebas   
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: 'Resultados de Pruebas Unitarias'
-          path: './TestResults/**/*.trx'
-          reporter: dotnet-trx
-          fail-on-error: false
   publish:
     name: Publish Web App
     runs-on: ubuntu-latest
     needs: build-and-test
     if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/qa' || github.ref == 'refs/heads/master')
-   
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
